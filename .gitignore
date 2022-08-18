@@ -14,5 +14,8 @@
 # IDEA
 *.idea
 
+# Build (only for linter in this case)
+build
+
 # Dependency directories (remove the comment below to include it)
 # vendor/
