@@ -152,10 +152,10 @@ func mergeUniqueInts(slices ...[]int) []int {
 
 // removeSameInts removes elements from 'dest' slice when they exist in 'source' slice
 func removeSameInts(dest, source []int) []int {
-	m := make(map[int]bool)
+	m := make(map[int]struct{})
 
 	for _, val := range source {
-		m[val] = true
+		m[val] = struct{}{}
 	}
 
 	for i := 0; i < len(dest); i++ {
