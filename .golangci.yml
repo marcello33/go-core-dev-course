@@ -21,7 +21,6 @@ linters:
     - nilerr
     - nilnil
     - noctx
-    - paralleltest
     - prealloc
     - predeclared
     - tenv

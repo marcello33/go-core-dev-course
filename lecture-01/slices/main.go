@@ -17,7 +17,7 @@ func main() {
 
 	// exercise 1
 	n := rand.Intn(10)
-	addInt(s0, n)
+	s0 = addInt(s0, n)
 	fmt.Printf("Slice after adding '%d' to each element: '%v' \n\n", n, s0)
 
 	// exercise 2
@@ -100,10 +100,12 @@ func main() {
 }
 
 // addInt adds n to each and every element in the slice s
-func addInt(s []int, n int) {
+func addInt(s []int, n int) []int {
 	for i := range s {
 		s[i] += n
 	}
+
+	return s
 }
 
 // appendInt appends n to the end of the slice s
@@ -131,13 +133,13 @@ func removeIntAtIndex(s []int, i int) ([]int, *int) {
 	return append(s[:i], s[i+1:]...), &v
 }
 
-// mergeUniqueInts merges slices of int, removes the duplicates from the result, and returns it
+// mergeUniqueInts merges slices of int, removes the duplicates from the result, sort elements and returns it
 func mergeUniqueInts(slices ...[]int) []int {
-	uniqueMap := map[int]bool{}
+	uniqueMap := map[int]struct{}{}
 
 	for _, slice := range slices {
 		for _, v := range slice {
-			uniqueMap[v] = true
+			uniqueMap[v] = struct{}{}
 		}
 	}
 
@@ -147,7 +149,7 @@ func mergeUniqueInts(slices ...[]int) []int {
 		res = append(res, key)
 	}
 
-	return res
+	return sortSlice(res, false)
 }
 
 // removeSameInts removes elements from 'dest' slice when they exist in 'source' slice

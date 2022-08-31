@@ -16,7 +16,7 @@ func main() {
 		"So - yeah - I am going to use it. Maybe I am not allowed tho :)"
 
 	fmt.Printf("\nCounting occurrences of string: \n'%s'\n", s0)
-	countWordsOccurrences(s0)
+	_ = countWordsOccurrences(s0)
 
 	// exercise 2
 	rand.Seed(time.Now().Unix())
@@ -41,8 +41,8 @@ func main() {
 	sortAndPrintMatrix(matrix)
 }
 
-// countWordsOccurrences counts the occurrences of each word in a given text and prints the result
-func countWordsOccurrences(s string) {
+// countWordsOccurrences counts the occurrences of each word in a given text and returns the result
+func countWordsOccurrences(s string) map[string]int {
 	words := strings.Fields(s)
 	m := make(map[string]int)
 
@@ -53,6 +53,8 @@ func countWordsOccurrences(s string) {
 	for i, v := range m {
 		fmt.Println(i, "--->", v)
 	}
+
+	return m
 }
 
 // generateRandomIntSlice returns a slice of integers with random length and elements
@@ -65,14 +67,16 @@ func generateRandomIntSlice() []int {
 	return s
 }
 
-// countIntsOccurrences counts the occurrences of each int in a given slice of integers
-func countIntsOccurrences(s []int) {
+// countIntsOccurrences counts the occurrences of each int in a given slice of integers and returns it
+func countIntsOccurrences(s []int) map[int]int {
 	m := make(map[int]int)
 	for _, v := range s {
 		m[v] = m[v] + 1
 	}
 
 	fmt.Println(m)
+
+	return m
 }
 
 // findSameInts finds the integers which appear in many slices and return a slice containing them
@@ -92,6 +96,12 @@ func findSameInts(slices ...[]int) []int {
 			s = append(s, k)
 		}
 	}
+
+	if len(s) == 0 {
+		return []int{}
+	}
+
+	sort.Ints(s)
 
 	return s
 }
