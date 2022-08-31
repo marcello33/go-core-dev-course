@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"sort"
 	"strings"
 	"time"
 )
@@ -37,6 +38,7 @@ func main() {
 	// exercise 5
 	matrix := generateRandomMatrix(rand.Intn(10), rand.Intn(10))
 	fmt.Printf("Generated random matrix before sort: '%v'\n\n", matrix)
+	sortAndPrintMatrix(matrix)
 }
 
 // countWordsOccurrences counts the occurrences of each word in a given text and prints the result
@@ -133,4 +135,28 @@ func generateRandomMatrix(m, n int) map[int]map[int][]byte {
 	}
 
 	return ret
+}
+
+// sortAndPrintMatrix prints the matrix as sorted data with descending sorting by iKeys and ascending by jKeysß
+func sortAndPrintMatrix(m map[int]map[int][]byte) {
+	iKeys := make([]int, 0, len(m))
+	for i := range m {
+		iKeys = append(iKeys, i)
+	}
+
+	// could have used the method implemented for slices but wanted to try the sort std package one
+	sort.Sort(sort.Reverse(sort.IntSlice(iKeys)))
+
+	for _, i := range iKeys {
+		jKeys := make([]int, 0, len(m[i]))
+		for j := range m[i] {
+			jKeys = append(jKeys, j)
+		}
+
+		sort.Sort(sort.Reverse(sort.IntSlice(jKeys)))
+
+		for _, j := range jKeys {
+			fmt.Printf("iKey:'%d', jKey'%d'", i, j)
+		}
+	}
 }
