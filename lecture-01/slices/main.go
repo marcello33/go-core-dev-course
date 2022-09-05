@@ -152,22 +152,22 @@ func mergeUniqueInts(slices ...[]int) []int {
 	return sortSlice(res, false)
 }
 
-// removeSameInts removes elements from 'dest' slice when they exist in 'source' slice
-func removeSameInts(dest, source []int) []int {
+// removeSameInts removes elements from 's1' slice when they exist in 's2' slice
+func removeSameInts(s1, s2 []int) []int {
 	m := make(map[int]struct{})
 
-	for _, val := range source {
+	for _, val := range s2 {
 		m[val] = struct{}{}
 	}
 
-	for i := 0; i < len(dest); i++ {
-		if _, ok := m[dest[i]]; ok {
-			dest, _ = removeIntAtIndex(dest, i)
+	for i := 0; i < len(s1); i++ {
+		if _, ok := m[s1[i]]; ok {
+			s1, _ = removeIntAtIndex(s1, i)
 			i--
 		}
 	}
 
-	return dest
+	return s1
 }
 
 // shiftInts shifts all int elements of a given slice a given number of times
